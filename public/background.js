@@ -39,6 +39,12 @@ function getAuth({email, password}, sendResponse) {
   }
 }
 
+function logout(sendResponse) {
+  chrome.storage.local.remove('userStatus')
+  .then(res => sendResponse('success'))
+  .catch(err => sendResponse('failed'))
+}
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === 'userStatus') {
     console.log(request.message)
@@ -46,6 +52,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true;
   } else if (request.message === 'login') {
     getAuth(request.payload, sendResponse);
+    return true;
+  } else if (request.message === 'logout') {
+    logout(sendResponse)
     return true;
   }
 });

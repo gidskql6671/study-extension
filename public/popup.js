@@ -8,3 +8,17 @@ chrome.runtime.sendMessage({
     window.location.href = './login.html';
   }
 });
+
+document.querySelector('.logout').addEventListener('click', event => {
+  chrome.runtime.sendMessage({
+    message: 'logout'
+  }, (response) => {
+    if (response === 'success') {
+      console.log('로그아웃 성공');
+      window.location.href = './login.html';
+    } else {
+      console.log('로그아웃 실패');
+    }
+  });
+
+})
