@@ -26,10 +26,26 @@ function isLogedIn(sendResponse) {
   });
 };
 
+function getAuth({email, password}, sendResponse) {
+  if (email == password) {
+    chrome.storage.local.set({
+      userStatus: email
+    }, (res) => {
+      if (chrome.runtime.lastError) sendResponse('failed');
+      sendResponse('success');
+    });
+  } else {
+    sendResponse('failed')
+  }
+}
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === 'userStatus') {
     console.log(request.message)
     isLogedIn(sendResponse);
+    return true;
+  } else if (request.message === 'login') {
+    getAuth(request.payload, sendResponse);
     return true;
   }
 });
