@@ -17,7 +17,8 @@
   "content_scripts": [
     {
       "matches": ["https://github.com/gidskql6671"],
-      "js": ["content_script.js"]
+      "js": ["content_script.js"],
+      "css": ["content_script.css"]
     }
   ]
 }

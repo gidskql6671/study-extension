@@ -1,0 +1,12 @@
+.ContributionCalendar-day[data-level="4"] {
+  fill: #F00 !important
+}
+.ContributionCalendar-day[data-level="3"] {
+  fill: #A00 !important
+}
+.ContributionCalendar-day[data-level="2"] {
+  fill: #600 !important
+}
+.ContributionCalendar-day[data-level="1"] {
+  fill: #300 !important
+}
