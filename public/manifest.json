@@ -13,5 +13,11 @@
   "permissions": ["storage", "activeTab", "scripting"],
   "action": {
     "default_popup": "./popup.html"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/gidskql6671"],
+      "js": ["content_script.js"]
+    }
+  ]
 }

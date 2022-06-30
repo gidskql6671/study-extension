@@ -41,8 +41,8 @@ function getAuth({email, password}, sendResponse) {
 
 function logout(sendResponse) {
   chrome.storage.local.remove('userStatus')
-  .then(res => sendResponse('success'))
-  .catch(err => sendResponse('failed'))
+  .then(_res => sendResponse('success'))
+  .catch(_err => sendResponse('failed'))
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
