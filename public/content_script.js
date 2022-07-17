@@ -1,7 +1,8 @@
 const calendar = document.body.querySelector('.js-calendar-graph-svg')
 const calendarHeight = Number(calendar.getAttribute('height'))
 calendar.setAttribute('height', calendarHeight * 3.5)
-const imgURL = chrome.runtime.getURL("images/tile.png")
+const tileImgUrl = chrome.runtime.getURL("images/tile.png")
+const flowerImgUrl = chrome.runtime.getURL("images/flower.png")
 
 const commitLines = calendar.querySelectorAll('g > g')
 if (commitLines.length > 0) {
@@ -46,8 +47,8 @@ function doubleBlocksSize(line) {
     const height = Number(commitBlock.getAttribute('height'))
 
     commitBlock.setAttribute('y', y * 2)
-    commitBlock.setAttribute('width', width * 2)
-    commitBlock.setAttribute('height', height * 2)
+    commitBlock.setAttribute('width', width * 2 + 6)
+    commitBlock.setAttribute('height', height * 2 + 6)
   })
 }
 
@@ -56,7 +57,32 @@ function changeBlockcColor(line) {
 
   commitBlocks
   .forEach(commitBlock => {
-    commitBlock.style.fill = '#744233'
+    // commitBlock.style.fill = '#744233'
     // commitBlock.style.fill = 'green'
+    const x = commitBlock.getAttribute('x')
+    const y = commitBlock.getAttribute('y')
+    const width = commitBlock.getAttribute('width')
+    const height = commitBlock.getAttribute('height')
+    const level = commitBlock.dataset.level
+    const count = commitBlock.dataset.count
+
+    const imageElement = document.createElementNS("http://www.w3.org/2000/svg", "image")
+
+    imageElement.setAttribute('x', x)
+    imageElement.setAttribute('y', y)
+    imageElement.setAttribute('width', width)
+    imageElement.setAttribute('height', height)
+    imageElement.classList.add('ContributionCalendar-day');
+    imageElement.dataset.level = level;
+    imageElement.dataset.count = count;
+    if (level > 0) {
+      imageElement.setAttribute('href', flowerImgUrl)
+    }
+    else {
+      imageElement.setAttribute('href', tileImgUrl)
+    }
+
+    commitBlock.parentElement.appendChild(imageElement)
+    commitBlock.parentElement.removeChild(commitBlock)
   })
 }
