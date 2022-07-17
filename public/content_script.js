@@ -6,6 +6,8 @@ const grass2ImgUrl = chrome.runtime.getURL("images/grass2.png")
 const grass3ImgUrl = chrome.runtime.getURL("images/grass3.png")
 const flower1ImgUrl = chrome.runtime.getURL("images/flower1.png")
 const flower2ImgUrl = chrome.runtime.getURL("images/flower2.png")
+const flower3ImgUrl = chrome.runtime.getURL("images/flower3.png")
+const flower4ImgUrl = chrome.runtime.getURL("images/flower4.png")
 
 const commitLines = calendar.querySelectorAll('g > g')
 if (commitLines.length > 0) {
@@ -17,7 +19,7 @@ if (commitLines.length > 0) {
     commitLine.parentElement.removeChild(commitLine)
 
     doubleBlocksSize(prevCommitLine)
-    changeBlockcColor(prevCommitLine)
+    changeBlocksToFlower(prevCommitLine)
   }
 
   if (commitLines.length % 2) {
@@ -55,7 +57,7 @@ function doubleBlocksSize(line) {
   })
 }
 
-function changeBlockcColor(line) {
+function changeBlocksToFlower(line) {
   const commitBlocks = line.querySelectorAll('.ContributionCalendar-day')
 
   commitBlocks
