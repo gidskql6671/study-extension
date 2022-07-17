@@ -2,7 +2,10 @@ const calendar = document.body.querySelector('.js-calendar-graph-svg')
 const calendarHeight = Number(calendar.getAttribute('height'))
 calendar.setAttribute('height', calendarHeight * 3.5)
 const tileImgUrl = chrome.runtime.getURL("images/tile.png")
-const flowerImgUrl = chrome.runtime.getURL("images/flower.png")
+const grass2ImgUrl = chrome.runtime.getURL("images/grass2.png")
+const grass3ImgUrl = chrome.runtime.getURL("images/grass3.png")
+const flower1ImgUrl = chrome.runtime.getURL("images/flower1.png")
+const flower2ImgUrl = chrome.runtime.getURL("images/flower2.png")
 
 const commitLines = calendar.querySelectorAll('g > g')
 if (commitLines.length > 0) {
@@ -75,11 +78,22 @@ function changeBlockcColor(line) {
     imageElement.classList.add('ContributionCalendar-day');
     imageElement.dataset.level = level;
     imageElement.dataset.count = count;
-    if (level > 0) {
-      imageElement.setAttribute('href', flowerImgUrl)
+    if (level == 0) {
+      imageElement.setAttribute('href', tileImgUrl)
+    }
+    else if (level == 1) {
+      imageElement.setAttribute('href', grass2ImgUrl)
+    }
+    else if (level == 2) {
+      imageElement.setAttribute('href', grass3ImgUrl)
     }
     else {
-      imageElement.setAttribute('href', tileImgUrl)
+      if (Math.random() <= 0.5) {
+        imageElement.setAttribute('href', flower1ImgUrl)
+      }
+      else {
+        imageElement.setAttribute('href', flower2ImgUrl)
+      }
     }
 
     commitBlock.parentElement.appendChild(imageElement)
